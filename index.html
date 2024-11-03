@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Problem Solving with Functions and Arrays</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            width: 80%;
+            max-width: 500px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .output {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Problem Solving Tasks</h1>
+        <button onclick="displayFizzBuzz()">Task 1: FizzBuzz Challenge</button>
+        <button onclick="displayScores()">Task 2: Filter, Map, and Reduce on Scores</button>
+        <button onclick="displayMaxMin()">Task 3: Maximum and Minimum in an Array</button>
+        <button onclick="displaySortedAndSum()">Bonus Task: Sorting and Summing</button>
+        <div class="output" id="output">Results will appear here...</div>
+    </div>
+
+    <script>
+        function displayFizzBuzz() {
+            const result = fizzBuzz();
+            document.getElementById('output').textContent = "FizzBuzz Result:\n" + result.join(", ");
+        }
+
+        function displayScores() {
+            const { passingScores, boostedScores, totalScore } = processScores();
+            document.getElementById('output').textContent = 
+                `Passing Scores: ${passingScores.join(", ")}\n` +
+                `Boosted Scores: ${boostedScores.join(", ")}\n` +
+                `Total Class Score: ${totalScore}`;
+        }
+
+        function displayMaxMin() {
+            const array = [85, 93, 78, 92, 88, 76, 95, 89];
+            const { max, min } = findMaxMin(array);
+            document.getElementById('output').textContent = `Array: ${array.join(", ")}\nMaximum: ${max}\nMinimum: ${min}`;
+        }
+
+        function displaySortedAndSum() {
+            const array = [85, 93, 78, 92, 88, 76, 95, 89];
+            const sortedArray = [...array].sort((a, b) => a - b);
+            const totalSum = sortedArray.reduce((sum, num) => sum + num, 0);
+            document.getElementById('output').textContent = `Sorted Array: ${sortedArray.join(", ")}\nTotal Sum: ${totalSum}`;
+        }
+
+        // Task 1: FizzBuzz Challenge
+        function fizzBuzz() {
+            let result = [];
+            for (let i = 1; i <= 50; i++) {
+                if (i % 3 === 0 && i % 5 === 0) {
+                    result.push("FizzBuzz");
+                } else if (i % 3 === 0) {
+                    result.push("Fizz");
+                } else if (i % 5 === 0) {
+                    result.push("Buzz");
+                } else {
+                    result.push(i);
+                }
+            }
+            return result;
+        }
+
+        // Task 2: Filter, Map, and Reduce on Scores
+        function processScores() {
+            const scores = [85, 93, 78, 92, 88, 76, 95, 89];
+            const passingScores = scores.filter(score => score >= 80);
+            const boostedScores = passingScores.map(score => score + 5);
+            const totalScore = boostedScores.reduce((sum, score) => sum + score, 0);
+            return { passingScores, boostedScores, totalScore };
+        }
+
+        // Task 3: Maximum and Minimum in an Array
+        function findMaxMin(arr) {
+            let max = arr[0];
+            let min = arr[0];
+            for (let i = 1; i < arr.length; i++) {
+                if (arr[i] > max) max = arr[i];
+                if (arr[i] < min) min = arr[i];
+            }
+            return { max, min };
+        }
+    </script>
+</body>
+</html>
